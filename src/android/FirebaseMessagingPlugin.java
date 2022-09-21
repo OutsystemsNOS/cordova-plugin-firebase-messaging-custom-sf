@@ -16,6 +16,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+import com.salesforce.marketingcloud.MarketingCloudSdk;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
@@ -100,6 +101,7 @@ public class FirebaseMessagingPlugin extends ReflectiveCordovaPlugin {
         if (type.isEmpty()) {
             firebaseMessaging.getToken().addOnCompleteListener(cordova.getActivity(), task -> {
                 if (task.isSuccessful()) {
+                    MarketingCloudSdk.requestSdk(marketingCloudSdk -> marketingCloudSdk.getPushMessageManager().setPushToken(task.getResult()));
                     callbackContext.success(task.getResult());
                 } else {
                     callbackContext.error(task.getException().getMessage());
@@ -294,6 +296,8 @@ public class FirebaseMessagingPlugin extends ReflectiveCordovaPlugin {
     static void sendToken(String instanceId) {
         if (instance != null) {
             if (instance.tokenRefreshCallback != null && instanceId != null) {
+
+                MarketingCloudSdk.requestSdk(marketingCloudSdk -> marketingCloudSdk.getPushMessageManager().setPushToken(instanceId));
                 PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, instanceId);
                 pluginResult.setKeepCallback(true);
                 instance.tokenRefreshCallback.sendPluginResult(pluginResult);

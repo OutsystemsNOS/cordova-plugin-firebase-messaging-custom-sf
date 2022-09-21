@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -20,6 +21,10 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import static android.content.ContentResolver.SCHEME_ANDROID_RESOURCE;
+
+
+import com.salesforce.marketingcloud.MarketingCloudSdk;
+import com.salesforce.marketingcloud.messages.push.PushMessageManager;
 
 
 public class FirebaseMessagingPluginService extends FirebaseMessagingService {
@@ -67,24 +72,31 @@ public class FirebaseMessagingPluginService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
         FirebaseMessagingPlugin.sendToken(token);
+        
+        MarketingCloudSdk.requestSdk(sdk -> sdk.getPushMessageManager().setPushToken(token));
 
         Intent intent = new Intent(ACTION_FCM_TOKEN);
         intent.putExtra(EXTRA_FCM_TOKEN, token);
         broadcastManager.sendBroadcast(intent);
+        
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        FirebaseMessagingPlugin.sendNotification(remoteMessage);
+        if (PushMessageManager.isMarketingCloudPush(remoteMessage)) {
+            MarketingCloudSdk.requestSdk(sdk -> sdk.getPushMessageManager().handleMessage(remoteMessage));
+        }else{
+            FirebaseMessagingPlugin.sendNotification(remoteMessage);
 
-        Intent intent = new Intent(ACTION_FCM_MESSAGE);
-        intent.putExtra(EXTRA_FCM_MESSAGE, remoteMessage);
-        broadcastManager.sendBroadcast(intent);
-
-        if (FirebaseMessagingPlugin.isForceShow()) {
-            RemoteMessage.Notification notification = remoteMessage.getNotification();
-            if (notification != null) {
-                showAlert(notification);
+            Intent intent = new Intent(ACTION_FCM_MESSAGE);
+            intent.putExtra(EXTRA_FCM_MESSAGE, remoteMessage);
+            broadcastManager.sendBroadcast(intent);
+    
+            if (FirebaseMessagingPlugin.isForceShow()) {
+                RemoteMessage.Notification notification = remoteMessage.getNotification();
+                if (notification != null) {
+                    showAlert(notification);
+                }
             }
         }
     }
