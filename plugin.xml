@@ -40,7 +40,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <config-file target="../../config.xml" parent="/widget" mode="replace" platform="ios">
             <preference name="NSUserTrackingUsageDescription" value="$USER_TRACKING_DESCRIPTION_IOS" />
         </config-file>
-
+	-->
         <config-file target="*-Info.plist" parent="UIBackgroundModes">
             <array>
                 <string>remote-notification</string>
