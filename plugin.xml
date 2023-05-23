@@ -100,7 +100,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             target-dir="src/by/chemerisuk/cordova/firebase" />
 
 
-		<hook type="after_prepare" src="hooks/remove_config_googleServices.js"/>
+	  <!-- <hook type="after_prepare" src="hooks/remove_config_googleServices.js"/> -->
     </platform>
 
 </plugin>
