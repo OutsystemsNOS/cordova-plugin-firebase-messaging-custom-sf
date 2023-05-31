@@ -9,9 +9,9 @@
 - (void)pluginInitialize {
     NSLog(@"Starting Firebase Messaging plugin");
 
-    if(![FIRApp defaultApp]) {
-        [FIRApp configure];
-    }
+    //if(![FIRApp defaultApp]) {
+    //    [FIRApp configure];
+    //}
 }
 
 - (void)requestPermission:(CDVInvokedUrlCommand *)command {
