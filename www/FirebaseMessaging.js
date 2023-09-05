@@ -13,6 +13,11 @@ module.exports = {
             exec(resolve, reject, PLUGIN_NAME, "unsubscribe", [topic]);
         });
     },
+    requestInitialize: function(topic) {
+        return new Promise(function(resolve, reject) {
+            exec(resolve, reject, PLUGIN_NAME, "requestInitialize", []);
+        });
+    },
     onTokenRefresh: function(success, error) {
         exec(success, error, PLUGIN_NAME, "onTokenRefresh", []);
     },
