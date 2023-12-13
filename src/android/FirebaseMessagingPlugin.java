@@ -20,6 +20,8 @@ import com.salesforce.marketingcloud.MarketingCloudSdk;
 
 //mlrosa - add PermissionHelper to grant push notification's permission on Android 13
 import org.apache.cordova.PermissionHelper;
+import android.Manifest;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
