@@ -60,6 +60,17 @@ module.exports = {
             exec(resolve, reject, PLUGIN_NAME, "requestPermission", [options || {}]);
         });
     },
+        requestPermissionHelper: function(options) {
+        return new Promise(function(resolve, reject) {
+            if (options) {
+                if (typeof options.forceShow !== "boolean" && typeof options.forceShow !== "undefined") {
+                    return reject(new TypeError("forceShow option must be a boolean"));
+                }
+            }
+
+            exec(resolve, reject, PLUGIN_NAME, "requestPermissionHelper", [options || {}]);
+        });
+    },
     findChannel: function(channelId) {
         return new Promise(function(resolve, reject) {
             exec(resolve, reject, PLUGIN_NAME, "findChannel", [channelId]);
