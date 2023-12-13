@@ -90,6 +90,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="default"/>
         </config-file>
 
+	<!-- mlrosa testing -->
+	<config-file parent="/*" target="AndroidManifest.xml">
+          <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+        </config-file>
+
         <dependency id="cordova-support-android-plugin" version="~1.0.0"/>
 
         <framework src="com.google.firebase:firebase-messaging:$ANDROID_FIREBASE_MESSAGING_VERSION" />
