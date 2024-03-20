@@ -15,9 +15,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </js-module>
 
     <engines>
-        <engine name="cordova" version=">=7.1.0"/>
+        <engine name="cordova" version=">=10.0.0"/>
         <engine name="cordova-android" version=">=8.1.0"/>
-        <engine name="cordova-ios" version=">=5.1.1"/>
+        <engine name="cordova-ios" version=">=6.0.0"/>
     </engines>
 
     <dependency id="cordova-plugin-firebase-analytics" url="https://github.com/OutSystems/cordova-plugin-firebase-analytics.git#5.0.0-OS6" /> 
@@ -25,8 +25,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <dependency id="cordova-outsystems-firebase-core" url="https://github.com/OutSystems/cordova-outsystems-firebase-core.git#1.0.1"/>
            
     <platform name="ios">
-        <!--<preference name="IOS_FIREBASE_POD_VERSION" default="~> 8.6.0"/>-->
-	<preference name="IOS_FIREBASE_POD_VERSION" default="~> 8.13.0"/>
+        <!--<preference name="IOS_FIREBASE_POD_VERSION" default="~> 8.13.0"/>-->
+	<preference name="IOS_FIREBASE_POD_VERSION" default="~> 10.17.0"/>
 	    
     	<!--<preference name="USER_TRACKING_DESCRIPTION_IOS" default="$(PRODUCT_NAME) needs your attention." /> -->
     	<preference name="USER_TRACKING_DESCRIPTION_IOS" default="Esta informação será utilizada para lhe apresentar anúncios personalizados." />
