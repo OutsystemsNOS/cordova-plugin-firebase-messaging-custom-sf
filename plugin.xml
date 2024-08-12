@@ -71,7 +71,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </platform>
 
     <platform name="android">
-        <preference name="ANDROID_FIREBASE_MESSAGING_VERSION" default="22.0.+"/>
+        <!--<preference name="ANDROID_FIREBASE_MESSAGING_VERSION" default="22.0.+"/>-->
+	<preference name="ANDROID_FIREBASE_MESSAGING_VERSION" default="24.0.0"/>
         <preference name="ANDROIDX_CORE_VERSION" default="1.6.+"/>
 
         <config-file target="res/xml/config.xml" parent="/*">
