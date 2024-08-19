@@ -4,6 +4,7 @@
 
 //@import Firebase;
 @import FirebaseMessaging;
+@import FirebaseCore;
 
 @implementation FirebaseMessagingPlugin
 
