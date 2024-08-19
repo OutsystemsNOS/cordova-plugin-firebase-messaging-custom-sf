@@ -2,7 +2,7 @@
 
 @import UserNotifications;
 //@import Firebase;
-@import FirebaseCore;
+@import FirebaseMessaging;
 
 @interface AppDelegate (FirebaseMessagingPlugin) <FIRMessagingDelegate, UNUserNotificationCenterDelegate>
 
