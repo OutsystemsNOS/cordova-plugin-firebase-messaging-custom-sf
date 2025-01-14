@@ -26,6 +26,7 @@ import static android.content.ContentResolver.SCHEME_ANDROID_RESOURCE;
 import com.salesforce.marketingcloud.MarketingCloudSdk;
 import com.salesforce.marketingcloud.messages.push.PushMessageManager;
 
+import androidx.activity.EdgeToEdge;
 
 public class FirebaseMessagingPluginService extends FirebaseMessagingService {
     private static final String TAG = "FCMPluginService";
@@ -48,6 +49,8 @@ public class FirebaseMessagingPluginService extends FirebaseMessagingService {
     public void onCreate() {
         broadcastManager = LocalBroadcastManager.getInstance(this);
         notificationManager = ContextCompat.getSystemService(this, NotificationManager.class);
+
+        EdgeToEdge.enable(this);
 
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
