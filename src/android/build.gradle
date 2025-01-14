@@ -1,14 +1,25 @@
 android {
     compileSdkVersion 33
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
 }
 
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
+repositories {
+    google()
+    jcenter()
+}
 
-    dependencies {
-        implementation 'androidx.activity:activity:1.8.0'
-    }
+dependencies {
+    implementation 'androidx.activity:activity:1.8.0'
 }
