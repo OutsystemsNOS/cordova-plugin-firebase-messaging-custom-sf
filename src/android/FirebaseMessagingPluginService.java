@@ -26,8 +26,6 @@ import static android.content.ContentResolver.SCHEME_ANDROID_RESOURCE;
 import com.salesforce.marketingcloud.MarketingCloudSdk;
 import com.salesforce.marketingcloud.messages.push.PushMessageManager;
 
-import androidx.activity.EdgeToEdge;
-
 public class FirebaseMessagingPluginService extends FirebaseMessagingService {
     private static final String TAG = "FCMPluginService";
 
