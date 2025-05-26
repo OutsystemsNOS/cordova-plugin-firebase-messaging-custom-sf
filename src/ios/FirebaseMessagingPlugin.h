@@ -4,6 +4,7 @@
 @import UserNotifications;
 
 @interface FirebaseMessagingPlugin : CDVPlugin
+- (void)hasPermission:(CDVInvokedUrlCommand*)command;
 - (void)requestPermission:(CDVInvokedUrlCommand*)command;
 - (void)clearNotifications:(CDVInvokedUrlCommand*)command;
 - (void)deleteToken:(CDVInvokedUrlCommand*)command;
