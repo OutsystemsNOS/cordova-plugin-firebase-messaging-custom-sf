@@ -1,7 +1,7 @@
 #import "FirebaseMessagingPlugin.h"
 #import <Cordova/CDV.h>
 #import "AppDelegate.h"
-#import <UserNotifications/UserNotifications.h>
+#import "UserNotifications/UserNotifications.h"
 
 //@import Firebase;
 @import FirebaseMessaging;
