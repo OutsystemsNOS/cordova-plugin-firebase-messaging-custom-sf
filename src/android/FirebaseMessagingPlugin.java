@@ -60,6 +60,18 @@ public class FirebaseMessagingPlugin extends ReflectiveCordovaPlugin {
         lastBundle = getNotificationData(cordova.getActivity().getIntent());
     }
 
+    //mlrosa - Added a new method to check if notifications are ative or not
+    @CordovaMethod
+    private void hasPermission(CallbackContext callbackContext) {
+        try {
+            Context context = cordova.getActivity().getApplicationContext();
+            boolean enabled = NotificationManagerCompat.from(context).areNotificationsEnabled();
+            callbackContext.success(Boolean.toString(enabled));
+        } catch (Exception e) {
+            callbackContext.error("Erro ao verificar permissões: " + e.getMessage());
+        }
+    }
+
     @CordovaMethod
     private void subscribe(String topic, final CallbackContext callbackContext) {
         firebaseMessaging.subscribeToTopic(topic).addOnCompleteListener(cordova.getActivity(), task -> {
