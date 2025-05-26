@@ -19,16 +19,20 @@
 //mlrosa - Added a new method to check if notifications are ative or not
 - (void)hasPermission:(CDVInvokedUrlCommand *)command {
     @try {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-            BOOL enabled = settings.authorizationStatus == UNAuthorizationStatusAuthorized ||
-                           settings.authorizationStatus == UNAuthorizationStatusProvisional;
-
-            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                               messageAsBool:enabled];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        }];
-    }
+        BOOL enabled = NO;
+        UIApplication *application = [UIApplication sharedApplication];
+    
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            enabled = application.currentUserNotificationSettings.types != UIUserNotificationTypeNone;
+        } else {
+            enabled = application.enabledRemoteNotificationTypes != UIRemoteNotificationTypeNone;
+        }
+    
+        NSString *isEnabledString = enabled ? @"true" : @"false"; // Convert BOOL to lowercase string
+    
+        CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:isEnabledString];
+        [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];    
+        }
     @catch (NSException *exception) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                         messageAsString:[NSString stringWithFormat:@"Erro ao verificar permissões: %@", exception.reason]];
