@@ -16,6 +16,26 @@
     }
 }
 
+//mlrosa - Added a new method to check if notifications are ative or not
+- (void)hasPermission:(CDVInvokedUrlCommand *)command {
+    @try {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            BOOL enabled = settings.authorizationStatus == UNAuthorizationStatusAuthorized ||
+                           settings.authorizationStatus == UNAuthorizationStatusProvisional;
+
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                               messageAsBool:enabled];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        }];
+    }
+    @catch (NSException *exception) {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:[NSString stringWithFormat:@"Erro ao verificar permissões: %@", exception.reason]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
 - (void)requestPermission:(CDVInvokedUrlCommand *)command {
     NSDictionary* options = [command.arguments objectAtIndex:0];
 
