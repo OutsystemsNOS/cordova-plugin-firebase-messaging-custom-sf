@@ -3,6 +3,11 @@ var PLUGIN_NAME = "FirebaseMessaging";
 var noop = function() {};
 
 module.exports = {
+   hasPermission: function(success, error) {
+        return new Promise(function(resolve, reject) {
+            exec(success, error, PLUGIN_NAME, "hasPermission", []);
+        });
+    },  
     subscribe: function(topic) {
         return new Promise(function(resolve, reject) {
             exec(resolve, reject, PLUGIN_NAME, "subscribe", [topic]);
