@@ -20,11 +20,13 @@
 //mlrosa - Added a new method to check if notifications are ative or not
 - (void)hasPermission:(CDVInvokedUrlCommand *)command {
     @try {
+        NSLog(@"Starting hasPermission");
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
             BOOL granted = settings.authorizationStatus == UNAuthorizationStatusAuthorized;
 
             NSString *isEnabledString = granted ? @"true" : @"false";
+            NSLog(@"Starting send result");
             CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:isEnabledString];
             [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
         }];
