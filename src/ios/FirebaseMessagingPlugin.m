@@ -23,12 +23,12 @@
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
             BOOL granted = settings.authorizationStatus == UNAuthorizationStatusAuthorized;
-    
+
             NSString *isEnabledString = granted ? @"true" : @"false";
             CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:isEnabledString];
             [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
-    }];
-    @catch (NSException *exception) {
+        }];
+    } @catch (NSException *exception) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                         messageAsString:[NSString stringWithFormat:@"Erro ao verificar permissões: %@", exception.reason]];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
