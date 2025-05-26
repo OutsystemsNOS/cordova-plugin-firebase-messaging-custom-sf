@@ -3,11 +3,6 @@ var PLUGIN_NAME = "FirebaseMessaging";
 var noop = function() {};
 
 module.exports = {
-   hasPermission: function() {
-        return new Promise(function(success, error) {
-            exec(success, error, PLUGIN_NAME, "hasPermission", []);
-        });
-    },
     subscribe: function(topic) {
         return new Promise(function(resolve, reject) {
             exec(resolve, reject, PLUGIN_NAME, "subscribe", [topic]);
@@ -63,6 +58,11 @@ module.exports = {
             }
 
             exec(resolve, reject, PLUGIN_NAME, "requestPermission", [options || {}]);
+        });
+    },
+   hasPermission: function() {
+        return new Promise(function(resolve, reject) {
+            exec(resolve, reject, PLUGIN_NAME, "hasPermission", []);
         });
     },
    requestPermissionHelper: function(options) {
